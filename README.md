@@ -25,7 +25,7 @@ Voir ci-dessous :
 
 Le contenu cet élément `<div id="autocompletion">` est alimenté par le résultat (après traitement) d’une requête de type **AJAX** sur une base de données.
 
-La fin du TD est consacrée à une fonctionnalité d’actualisation de l’élément `<select id="pays">` (sélecteur du pays) par changement de l’autre élément `<select id="continent">` (sélection du continent), ainsi qu'à diverses fonctionnalités complémentaires liées à la div `<input id="ville">`.
+La fin du TD est consacrée à une fonctionnalité d’actualisation de l’élément `<select id="pays">` (sélecteur du pays) par changement de l’autre élément `<select id="continent">` (sélection du continent), ainsi qu'à diverses fonctionnalités complémentaires liées à la balise `<input id="ville">`.
 
 Contrairement à la liste de villes (plus de 36000 entrées, ce qui justifie le stockage sur base de données), la liste de pays par continent est de taille raisonnable et sera gérée en local par JavaScript, par un fichier `countries.js` qui affecte une variable globale `countries`.  
 
