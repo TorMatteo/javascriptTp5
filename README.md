@@ -184,7 +184,7 @@ Et on pourrait utiliser par exemple un appel `requeteAJAX("Bo",callback_1);`
    <img src="ressources/img2.png">
 </p>
 
-6. Créez une fonction `callback_3` qui transforme encore le résultat précédent pour créer un tableau contenant l’attribut `name` de chacun des objets. Ainsi, quand on lance la commande `requeteAJAX("Bo",callback_3)` on doit ontenir dans la console :
+6. Créez une fonction `callback_3` qui transforme encore le résultat précédent pour créer un tableau contenant l’attribut `name` de chacun des objets. Ainsi, quand on lance la commande `requeteAJAX("Bo",callback_3)` on doit obtenir dans la console :
 
 <p align="center">
    <img src="ressources/img3.png">
