@@ -5,7 +5,7 @@
 ## TD6
 #### _Thème : asynchronisme en JavaScript, AJAX, formulaire autocomplétif_
 
-Cliquez sur le lien ci-dessous pour faire, dans un dossier public_html/JS/TD1, votre fork privé du TD1 (**attention, pas de fork à la main !**):
+Cliquez sur le lien ci-dessous pour faire, dans un dossier public_html/JS/TD6, votre fork privé du TD6 (**attention, pas de fork à la main !**):
 
 https://classroom.github.com/a/ue7kM_dc
 
