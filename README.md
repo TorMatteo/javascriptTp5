@@ -2,7 +2,7 @@
 
 ### IUT Montpellier-Sète – Département Informatique
 
-## TD5
+## TD6
 #### _Thème : asynchronisme en JavaScript, AJAX, formulaire autocomplétif_
 
 Cliquez sur le lien ci-dessous pour faire, dans un dossier public_html/JS/TD1, votre fork privé du TD1 (**attention, pas de fork à la main !**):
@@ -13,7 +13,7 @@ la version [pdf](ressources/td5.pdf)
 
 ## INTRODUCTION
 
-Dans ce TD5, on reprend l’aspect asynchrone de JavaScript (abordé au TD4), qui permettra de modifier le contenu d’un élément d’autocomplétion, représenté par la balise html `<div id="autocompletion">`, à chaque modification du champ de saisie `<input id="ville">`.
+Dans ce TD6, on reprend l’aspect asynchrone de JavaScript (abordé au TD5), qui permettra de modifier le contenu d’un élément d’autocomplétion, représenté par la balise html `<div id="autocompletion">`, à chaque modification du champ de saisie `<input id="ville">`.
 
 Cet élément `<div id="autocompletion">` fournira alors une liste de villes dont le nom commence par les lettres insérées dans `<input id="ville">`.
 
