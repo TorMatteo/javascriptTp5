@@ -23,7 +23,7 @@ Voir ci-dessous :
    <img src="ressources/img1.png">
 </p>
 
-Le contenu cet élément `<div id="autocompletion">` est alimenté par le résultat (après traitement) d’une requête de type **AJAX** sur une base de données.
+Le contenu de cet élément `<div id="autocompletion">` est alimenté par le résultat (après traitement) d’une requête de type **AJAX** sur une base de données.
 
 La fin du TD est consacrée à une fonctionnalité d’actualisation de l’élément `<select id="pays">` (sélecteur du pays) par changement de l’autre élément `<select id="continent">` (sélection du continent), ainsi qu'à diverses fonctionnalités complémentaires liées à la balise `<input id="ville">`.
 
