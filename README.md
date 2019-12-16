@@ -9,7 +9,7 @@ Cliquez sur le lien ci-dessous pour faire, dans un dossier public_html/JS/TD6, v
 
 https://classroom.github.com/a/ue7kM_dc
 
-la version [pdf](ressources/td5.pdf)
+la version [pdf](ressources/td6.pdf)
 
 ## INTRODUCTION
 
