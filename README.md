@@ -7,7 +7,7 @@
 
 Cliquez sur le lien ci-dessous pour faire, dans un dossier public_html/JS/TD6, votre fork privé du TD6 (**attention, pas de fork à la main !**):
 
-https://classroom.github.com/a/ue7kM_dc
+https://classroom.github.com/a/ow1HkVsz
 
 la version [pdf](ressources/td6.pdf)
 
