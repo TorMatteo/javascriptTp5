@@ -29,17 +29,9 @@ La fin du TD est consacrée à une fonctionnalité d’actualisation de l’él�
 
 Contrairement à la liste de villes (plus de 36000 entrées, ce qui justifie le stockage sur base de données), la liste de pays par continent est de taille raisonnable et sera gérée en local par JavaScript, par un fichier `countries.js` qui affecte une variable globale `countries`.  
 
-Vous mettrez en place un contexte web dans votre `public_html` avec les fichiers :
+Vous mettrez en place le contexte web dans votre `public_html/JS/TD6` avec les fichiers du dossier `src`.
 
-- completion.css,
-- loading.gif qui sert plus tard,
-- scripts.js à compléter,
-- countries.js qui sert plus tard,
-- la base de requeteVille.php,
-- Conf.php, Model.php, resultat.php,
-- completion.html
-
-Le fichier `scripts.js` est à construire complètement.
+Le fichier `js/scripts.js` est à construire complètement.
 
 ## EXERCICE 1 – Ébauche du fichier `scripts.js`
 
