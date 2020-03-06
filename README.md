@@ -69,7 +69,7 @@ Vous n’interviendrez que sur quelques lignes du fichier `requeteVille.php`.
 
 Ce fichier sera exécuté au moyen d’url du type `requeteVille.php?ville=Bo`
 
-Le paramètre `ville` permettra d’utiliser `selectByName($name)`, avec la bonne valeur pour le paramètre `$name`. Par exemple, l’url `http://webinfo.iutmontp.univ-montp2.fr/~monlogin/JS/td5-moi/src/php/requeteVille.php?ville=Bo` permettra de lancer, par la fonction `selectByName`, la requête `SQL` suivante :
+Le paramètre `ville` permettra d’utiliser `selectByName($name)`, avec la bonne valeur pour le paramètre `$name`. Par exemple, l’url `http://webinfo.iutmontp.univ-montp2.fr/~monlogin/JS/td6-moi/src/php/requeteVille.php?ville=Bo` permettra de lancer, par la fonction `selectByName`, la requête `SQL` suivante :
 
 		SELECT * FROM cities WHERE name LIKE 'Bo%' LIMIT 5
 
