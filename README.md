@@ -7,10 +7,6 @@
 
 Cliquez sur le lien ci-dessous pour faire, dans un dossier public_html/JS/TD6, votre fork privé du TD6 (**attention, pas de fork à la main !**):
 
-https://classroom.github.com/a/ow1HkVsz
-
-la version [pdf](ressources/td6.pdf)
-
 ## INTRODUCTION
 
 Dans ce TD6, on reprend l’aspect asynchrone de JavaScript (abordé au TD5), qui permettra de modifier le contenu d’un élément d’autocomplétion, représenté par la balise html `<div id="autocompletion">`, à chaque modification du champ de saisie `<input id="ville">`.
@@ -37,17 +33,21 @@ Le fichier `js/scripts.js` est à construire complètement.
 
 1. Dans le fichier `scripts.js`, codez la fonction `afficheVilles` qui prend en paramètre un tableau de villes comme `["Bordeaux","Toulouse","Montpellier","Nice"]` et remplit la `<div id="autocompletion">` avec un paragraphe par nom de villes comme ci-dessous
 
-   		<div id="autocompletion">
-   			<p>Bordeaux</p>
-   			<p>Toulouse</p>
-   			<p>Montpellier</p>
-   			<p>Nice</p>
-   		</div>
+   ```html
+   <div id="autocompletion">
+     <p>Bordeaux</p>
+     <p>Toulouse</p>
+	 <p>Montpellier</p>
+     <p>Nice</p>
+   </div>
+	```
 
    Votre code utilisera obligatoirement la méthode `appendChild` pour chaque `<p>` à créer. Insérez votre fichier `scripts.js` dans le `html`, puis testez votre fonction avec le tableau ci-dessus en le déclarant dans une variable `tableau` et en lançant `afficheVilles(tableau)` dans la console;
 
-   		let tableau = ["Bordeaux","Toulouse","Montpellier","Nice"];
-   		afficheVilles(tableau);
+	```js
+	let tableau = ["Bordeaux","Toulouse","Montpellier","Nice"];
+	afficheVilles(tableau);
+	```
 
    Faites un deuxième appel de la fonction avec le même tableau. Vous devez constater qu’il peut être malin de commencer par vider le contenu de la balise `<div id="autocompletion">`. C'est ce que nous allons faire dans la question suivante.
 
@@ -59,7 +59,7 @@ Le fichier `js/scripts.js` est à construire complètement.
 
    Remarque : on ne dit pas que les méthodes `appendChild` et `removeChild` sont meilleures qu’un "bricolage" du `innerHTML`, par contre elles sont plus dans la logique objet, et seront plus simples à utiliser si l’arborescence à ajouter/modifier se complique. Notre arborescence de `<p>` reste ici simple.
 
-## EXERCICE 2 – La page de requête requeteVille.php
+## EXERCICE 2 – La page de requête `requeteVille.php`
 
 Cette page côté serveur est déjà codée pour vous permettre de lancer une requête de type `SELECT` sur la base de données. Elle incorpore un fichier `Model.php` qui incorpore lui-même un fichier `Conf.php`. Ce fichier `Model.php` vous propose une méthode `static selectByName` qui permettra de récupérer les 5 premières villes dont le nom commence comme la chaîne de caractères passée en paramètre à cette méthode (voir le code).
 
@@ -71,7 +71,9 @@ Ce fichier sera exécuté au moyen d’url du type `requeteVille.php?ville=Bo`
 
 Le paramètre `ville` permettra d’utiliser `selectByName($name)`, avec la bonne valeur pour le paramètre `$name`. Par exemple, l’url `http://webinfo.iutmontp.univ-montp2.fr/~monlogin/JS/td6-moi/src/php/requeteVille.php?ville=Bo` permettra de lancer, par la fonction `selectByName`, la requête `SQL` suivante :
 
-		SELECT * FROM cities WHERE name LIKE 'Bo%' LIMIT 5
+```sql
+SELECT * FROM cities WHERE name LIKE 'Bo%' LIMIT 5
+```
 
 1. Complétez la page `requeteVille.php` pour qu’elle suive les étapes suivantes :
 
@@ -103,64 +105,69 @@ L’ensemble des technologies autour des pages web asynchrones s’appelle `AJAX
 
 Voici le squelette d’une requête `AJAX` :
 
+```js
+function requeteAJAX(stringVille) {
+  let url = "php/requeteVille.php?ville=" + encodeURIComponent(stringVille);
+  let requete = new XMLHttpRequest();
+  requete.open("GET", url, true);
+  requete.addEventListener("load", function () {
+    console.log(requete);
+  });
+  requete.send(null);
+}
+```
 
-		function requeteAJAX(stringVille) {
-			let url = "php/requeteVille.php?ville=" + stringVille;
-			let requete = new XMLHttpRequest();
-			requete.open("GET", url, true);
-			requete.addEventListener("load", function () {
-				console.log(requete);
-			});
-			requete.send(null);
-		}
-
-
-La fonction `requeteAJAX` :
+Rappels sur la fonction `requeteAJAX` :
 
 + gère un paramètre `stringVille` qui est une chaîne de caractères (ce sera celle qu’on écrira dans la balise `<input id="ville">`);
-+ crée une url pour `requeteVille.php`, construite à partir du paramètre `stringVille`;
++ crée une url pour `requeteVille.php`, construite à partir du paramètre `stringVille`. On traite `stringVille` pour gérer les caractères spéciaux des URL avec [encodeURIComponent](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent);
 + crée un objet `XMLHttpRequest` nommé `requete`;
 + ouvre cette requête avec la méthode `open` qui donne le type de requête HTTP à effectuer (ici `GET`), l’URL de la page demandée et le troisième argument (`true`) signifie que la requête doit être asynchrone.
-+ met cet objet `requete` en écoute de l’événement `load`, ce qui signifie que l’objet `requete` attendra la fin du chargement des données commandées à la base de données, pour lancer la fonction déclarée de manière anonyme et dont la modeste mission est ici d’afficher l’objet `requete` dans la console).
-+ lance la requête par la méthode `send`. Le paramètre `null` est lié au fait que la méthode est `GET`. Si c’était `POST`, on aurait comme paramètre une chaîne de caractères annonçant les paires «`nom=valeur`», c’est-à-dire ici «`ville=…`»
++ met cet objet `requete` en écoute de l’événement `load`, ce qui signifie que l’objet `requete` attendra la fin du chargement des données commandées à la base de données, pour lancer la fonction déclarée de manière anonyme et dont la modeste mission est ici d’afficher l’objet `requete` dans la console.
++ lance la requête par la méthode `send`. Le paramètre `null` est lié au fait que la méthode est `GET`. Si c’était `POST`, on aurait comme paramètre une chaîne de caractères annonçant les paires «`nom=valeur`», c’est-à-dire ici «`ville=…`» (cf. la [documentation MDN de send](https://developer.mozilla.org/fr/docs/Web/API/XMLHttpRequest/send)).
 
 
 Le principe d’une requête asynchrone est qu’elle ne bloque pas l’exécution du JavaScript le temps que le serveur renvoie sa réponse.
 
-La fonction anonyme, qui ne fait qu’afficher l’objet requete dans la console, est appelée fonction **callback**. Elle sera appelée lorsque le serveur aura retourné ses informations.
+La fonction anonyme, qui ne fait qu’afficher l’objet `requete` dans la console, est appelée fonction **callback**. Elle sera appelée lorsque le serveur aura retourné ses informations.
 
 Elle a pour mission **le traitement de la réponse du serveur**. Bien entendu, au final, cette fonction _callback_ aura pour mission de remplir le contenu de la balise `<div id="autocompletion">`.
 
 C’est ce que nous allons structurer, en plusieurs étapes. Comme nous allons construire plusieurs versions de la fonction `callback`, nous allons plutôt utiliser ce code plus générique :
 
-
-		function requeteAJAX(stringVille,callback) {
-			let url = "php/requeteVille.php?ville=" + stringVille;
-			let requete = new XMLHttpRequest();
-			requete.open("GET", url, true);
-			requete.addEventListener("load", function () {
-				callback(requete);
-			});
-			requete.send(null);
-		}
-
+```js
+function requeteAJAX(stringVille,callback) {
+	let url = "php/requeteVille.php?ville=" + encodeURIComponent(stringVille);
+	let requete = new XMLHttpRequest();
+	requete.open("GET", url, true);
+	requete.addEventListener("load", function () {
+		callback(requete);
+	});
+	requete.send(null);
+}
+```
 
 Dans cette version de `requeteAJAX`, on passera en deuxième paramètre le nom de la fonction qu’on aura choisie pour jouer le rôle du callback. Ainsi, pour avoir l’équivalent du premier code, on pourrait avoir définir une fonction `callback_1` de la façon suivante :
 
-		function callback_1(req) {
-			console.log(req);
-		}
-
+```js
+function callback_1(req) {
+	console.log(req);
+}
+```
 
 Et on pourrait utiliser par exemple un appel `requeteAJAX("Bo",callback_1);`
 
-### écriture de quelques versions du callback
+### Écriture de quelques versions du callback
 
-1. Complétez votre fichier `scripts.js` avec le code des deux cadres précédents. Placez la ligne d’insertion du script dans le `head` de la page.
+1. Complétez votre fichier `scripts.js` avec le code des deux cadres précédents. 
 
-   Nouveauté : ajoutez l’attribut `defer` à `<script>` pour que le chargement du JS ne bloque pas la construction du DOM. Ceci revient à placer l’insertion du fichier avant la fin du `body`. La ligne d’insertion sera donc :
+<!-- Placez la ligne d’insertion du script dans le `head` de la page. -->
 
-		<script type="text/javascript" src="js/scripts.js" defer></script>
+<!--    Nouveauté : ajoutez l’attribut `defer` à `<script>` pour que le chargement du JS ne bloque pas la construction du DOM. Ceci revient à placer l’insertion du fichier avant la fin du `body`. La ligne d’insertion sera donc : -->
+
+<!-- 	```html -->
+<!-- 	<script type="text/javascript" src="js/scripts.js" defer></script> -->
+<!-- 	``` -->
 
 2. Rechargez la page `src/completion.html` et lancez dans la console la commande `requeteAJAX("Bo",callback_1);`. Vous devez voir dans la console un descriptif complet de l’objet `requete`, avec notamment son attribut `responseText`.
 
@@ -210,15 +217,15 @@ Et on pourrait utiliser par exemple un appel `requeteAJAX("Bo",callback_1);`
 ## EXERCICE 5 – Les deux sélecteurs
 
 
-Les deux sélecteurs `<select id="continent">` et `<select id="pays">` vont fonctionner indépendamment du champ d’autocomplétion. Le sélecteur de continents sera chargé dès le début, et le contenu du sélecteur de pays devra s’actualiser au changement de la valeur du sélecteur de continents. La liste des pays et des continents auxquels ils appartiennent se trouve dans le fichier `countries.js`.
+Les deux sélecteurs `<select id="continent">` et `<select id="pays">` vont fonctionner indépendamment du champ d’autocomplétion. Le sélecteur de continents sera chargé dès le début, et le contenu du sélecteur de pays devra s’actualiser au changement de la valeur du sélecteur de continents. La liste des pays et des continents auxquels ils appartiennent se trouve dans le fichier `countries.js` (qui est déjà chargé par `completion.html`).
 
 
 ### Le sélecteur de continents
 
 
-1. Insérez, au niveau du `head` de `completion.html`, le fichier `countries.js` qui permet d’accéder à la variable `countries`. Attention d’insérer ce fichier avant le précédent. Réutilisez l’attribut `defer`.
+<!-- 1. Insérez, au niveau du `head` de `completion.html`, le fichier `countries.js` qui permet d’accéder à la variable `countries`. Attention d’insérer ce fichier avant le précédent. Réutilisez l’attribut `defer`. -->
 
-2. Créez, dans `scripts.js`, une fonction `chargerSelecteurContinents` basée sur `appendChild` et qui permet de structurer le sélecteur de continents en lui ajoutant des enfants `<option>...</option>`. Chacun de ces enfants aura pour `innerHTML` l’une des clés qu’on obtient par la méthode `Object.keys` appliquée à `countries`.
+1. Créez, dans `scripts.js`, une fonction `chargerSelecteurContinents` basée sur `appendChild` et qui permet de structurer le sélecteur de continents en lui ajoutant des enfants `<option>...</option>`. Chacun de ces enfants aura pour `innerHTML` l’une des clés qu’on obtient par la méthode `Object.keys` appliquée à `countries`.
 
    Vous aurez donc à utiliser le contenu de `Object.keys(countries)`.
 
@@ -226,9 +233,9 @@ Les deux sélecteurs `<select id="continent">` et `<select id="pays">` vont fonc
 
    Testez cette fonction dans la console et vérifiez que le sélecteur de continents se remplit bien.
 
-3. Faites en sorte que ce sélecteur se remplisse au chargement de la page. Pour cela, votre fonction `chargerSelecteurContinents` sera associée à l’événement `DOMContentLoaded` dans un écouteur d’événement de l’objet `document`.
+3. Faites en sorte que ce sélecteur se remplisse au chargement de la page. 
 
-
+<!-- Pour cela, votre fonction `chargerSelecteurContinents` sera associée à l’événement `DOMContentLoaded` dans un écouteur d’événement de l’objet `document`. -->
 
 ### Le sélecteur de pays
 
@@ -270,10 +277,9 @@ Lorsqu’un chargement est en cours, nous pouvons le signaler à l’utilisateur
 
    + La deuxième sera exécutée dès la réception de la réponse. On aura donc des appels de la forme
 
-
-
-        	requeteAJAX("Bo",callback,action_debut,action_fin)
-
+		```js
+		requeteAJAX("Bo",callback,action_debut,action_fin)
+		```
 
 
 2. Dans la fonction `maRequeteAJAX`, modifiez l’appel à `requeteAJAX` pour ajouter deux nouveaux paramètres : ce seront deux fonctions déclarées en fonctions anonymes :
