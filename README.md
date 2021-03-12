@@ -7,7 +7,7 @@
 
 Cliquez sur le lien ci-dessous pour faire, dans un dossier public_html/JS/TD6, votre fork privé du TD6 (**attention, pas de fork à la main !**):
 
-## INTRODUCTION
+## Introduction
 
 Dans ce TD6, on reprend l’aspect asynchrone de JavaScript (abordé au TD5), qui permettra de modifier le contenu d’un élément d’autocomplétion, représenté par la balise html `<div id="autocompletion">`, à chaque modification du champ de saisie `<input id="ville">`.
 
@@ -16,20 +16,20 @@ Cet élément `<div id="autocompletion">` fournira alors une liste de villes don
 Voir ci-dessous :
 
 <p align="center">
-   <img src="ressources/img1.png">
+   <img src="ressources/img1-crop.png">
 </p>
 
 Le contenu de cet élément `<div id="autocompletion">` est alimenté par le résultat (après traitement) d’une requête de type **AJAX** sur une base de données.
 
-La fin du TD est consacrée à une fonctionnalité d’actualisation de l’élément `<select id="pays">` (sélecteur du pays) par changement de l’autre élément `<select id="continent">` (sélection du continent), ainsi qu'à diverses fonctionnalités complémentaires liées à la balise `<input id="ville">`.
+<!-- La fin du TD est consacrée à une fonctionnalité d’actualisation de l’élément `<select id="pays">` (sélecteur du pays) par changement de l’autre élément `<select id="continent">` (sélection du continent), ainsi qu'à diverses fonctionnalités complémentaires liées à la balise `<input id="ville">`. -->
 
-Contrairement à la liste de villes (plus de 36000 entrées, ce qui justifie le stockage sur base de données), la liste de pays par continent est de taille raisonnable et sera gérée en local par JavaScript, par un fichier `countries.js` qui affecte une variable globale `countries`.  
+<!-- Contrairement à la liste de villes (plus de 36000 entrées, ce qui justifie le stockage sur base de données), la liste de pays par continent est de taille raisonnable et sera gérée en local par JavaScript, par un fichier `countries.js` qui affecte une variable globale `countries`.   -->
 
 Vous mettrez en place le contexte web dans votre `public_html/JS/TD6` avec les fichiers du dossier `src`.
 
 Le fichier `js/scripts.js` est à construire complètement.
 
-## EXERCICE 1 – Ébauche du fichier `scripts.js`
+## Exercice 1 – Ébauche du fichier `scripts.js`
 
 1. Dans le fichier `scripts.js`, codez la fonction `afficheVilles` qui prend en paramètre un tableau de villes comme `["Bordeaux","Toulouse","Montpellier","Nice"]` et remplit la `<div id="autocompletion">` avec un paragraphe par nom de villes comme ci-dessous
 
@@ -59,7 +59,7 @@ Le fichier `js/scripts.js` est à construire complètement.
 
    Remarque : on ne dit pas que les méthodes `appendChild` et `removeChild` sont meilleures qu’un "bricolage" du `innerHTML`, par contre elles sont plus dans la logique objet, et seront plus simples à utiliser si l’arborescence à ajouter/modifier se complique. Notre arborescence de `<p>` reste ici simple.
 
-## EXERCICE 2 – La page de requête `requeteVille.php`
+## Exercice 2 – La page de requête `requeteVille.php`
 
 Cette page côté serveur est déjà codée pour vous permettre de lancer une requête de type `SELECT` sur la base de données. Elle incorpore un fichier `Model.php` qui incorpore lui-même un fichier `Conf.php`. Ce fichier `Model.php` vous propose une méthode `static selectByName` qui permettra de récupérer les 5 premières villes dont le nom commence comme la chaîne de caractères passée en paramètre à cette méthode (voir le code).
 
@@ -95,7 +95,7 @@ SELECT * FROM cities WHERE name LIKE 'Bo%' LIMIT 5
    <i>résultat de la requête <strong>requeteVille.php?ville=Tou</strong></i>
 </p>
 
-## EXERCICE 3 – Requête asynchrone
+## Exercice 3 – Requête asynchrone
 
 ### Un peu de technique
 
@@ -197,7 +197,7 @@ Et on pourrait utiliser par exemple un appel `requeteAJAX("Bo",callback_1);`
 9. Puisque `callback_4` est satisfaisante, c'est elle que nous adoptons. Créez maintenant, toujours dans le fichier `scripts.js`, une fonction `maRequeteAJAX` qui prend en paramètre une chaîne de caractères. Grâce à cette fonction, l’instruction `maRequeteAJAX("Toul")` sera exactement équivalente à l’instruction `requeteAJAX("Toul",callback_4)`.
 
 
-## Exercice 4 – premiers gestionnaires d’événements
+## Exercice 4 – Premiers gestionnaires d’événements
 
 
 1. Munissez le champ `<input id="ville">` d’un écouteur d’événement, associé à l’événement `input` (qui est lancé à chaque modification du contenu d’un `<input>`). La fonction appelée sera déclarée de façon anonyme, et son action sera d’appeler la fonction `maRequeteAJAX`, avec comme paramètre la valeur de la balise `<input id="ville">`.
@@ -214,47 +214,47 @@ Et on pourrait utiliser par exemple un appel `requeteAJAX("Bo",callback_1);`
 	A ce stade votre champ d’autocomplétion est opérationnel.
 
 
-## EXERCICE 5 – Les deux sélecteurs
+<!-- ## Exercice 5 – Les deux sélecteurs -->
 
 
-Les deux sélecteurs `<select id="continent">` et `<select id="pays">` vont fonctionner indépendamment du champ d’autocomplétion. Le sélecteur de continents sera chargé dès le début, et le contenu du sélecteur de pays devra s’actualiser au changement de la valeur du sélecteur de continents. La liste des pays et des continents auxquels ils appartiennent se trouve dans le fichier `countries.js` (qui est déjà chargé par `completion.html`).
+<!-- Les deux sélecteurs `<select id="continent">` et `<select id="pays">` vont fonctionner indépendamment du champ d’autocomplétion. Le sélecteur de continents sera chargé dès le début, et le contenu du sélecteur de pays devra s’actualiser au changement de la valeur du sélecteur de continents. La liste des pays et des continents auxquels ils appartiennent se trouve dans le fichier `countries.js` (qui est déjà chargé par `completion.html`). -->
 
 
-### Le sélecteur de continents
+<!-- ### Le sélecteur de continents -->
 
 
-<!-- 1. Insérez, au niveau du `head` de `completion.html`, le fichier `countries.js` qui permet d’accéder à la variable `countries`. Attention d’insérer ce fichier avant le précédent. Réutilisez l’attribut `defer`. -->
+<!-- <\!-- 1. Insérez, au niveau du `head` de `completion.html`, le fichier `countries.js` qui permet d’accéder à la variable `countries`. Attention d’insérer ce fichier avant le précédent. Réutilisez l’attribut `defer`. -\-> -->
 
-1. Créez, dans `scripts.js`, une fonction `chargerSelecteurContinents` basée sur `appendChild` et qui permet de structurer le sélecteur de continents en lui ajoutant des enfants `<option>...</option>`. Chacun de ces enfants aura pour `innerHTML` l’une des clés qu’on obtient par la méthode `Object.keys` appliquée à `countries`.
+<!-- 1. Créez, dans `scripts.js`, une fonction `chargerSelecteurContinents` basée sur `appendChild` et qui permet de structurer le sélecteur de continents en lui ajoutant des enfants `<option>...</option>`. Chacun de ces enfants aura pour `innerHTML` l’une des clés qu’on obtient par la méthode `Object.keys` appliquée à `countries`. -->
 
-   Vous aurez donc à utiliser le contenu de `Object.keys(countries)`.
+<!--    Vous aurez donc à utiliser le contenu de `Object.keys(countries)`. -->
 
-   Vous ajouterez un enfant de la forme `<option selected disabled>choisissez un continent</option>`. Il faudra pour cela agir sur les attributs `selected` et `disabled` de l’élément créé (les mettre à la valeur `true`).
+<!--    Vous ajouterez un enfant de la forme `<option selected disabled>choisissez un continent</option>`. Il faudra pour cela agir sur les attributs `selected` et `disabled` de l’élément créé (les mettre à la valeur `true`). -->
 
-   Testez cette fonction dans la console et vérifiez que le sélecteur de continents se remplit bien.
+<!--    Testez cette fonction dans la console et vérifiez que le sélecteur de continents se remplit bien. -->
 
-3. Faites en sorte que ce sélecteur se remplisse au chargement de la page. 
+<!-- 3. Faites en sorte que ce sélecteur se remplisse au chargement de la page.  -->
 
-<!-- Pour cela, votre fonction `chargerSelecteurContinents` sera associée à l’événement `DOMContentLoaded` dans un écouteur d’événement de l’objet `document`. -->
+<!-- <\!-- Pour cela, votre fonction `chargerSelecteurContinents` sera associée à l’événement `DOMContentLoaded` dans un écouteur d’événement de l’objet `document`. -\-> -->
 
-### Le sélecteur de pays
-
-
-4. Lors d’un changement de valeur du sélecteur de continents, le sélecteur de pays doit proposer les pays du continent sélectionné.
-
-   Créez, dans `scripts.js`, une fonction `chargerSelecteurPays` qui permet de construire les fils de la balise `<select id="pays">` :
-
-	+ récupérer la valeur du sélecteur de continents ;
-	+ récupérer, dans `countries`, le tableau correspondant à cette valeur ;
-	+ créer, pour chaque entrée du tableau, une ligne du sélecteur de pays au moyen de la méthode `appendChild` (assez similaire au sélecteur de continents).
-	+ ne pas oublier la ligne `<option selected disabled>choisissez un pays</option>`
-
-5. Testez votre fonction dans la console. Vous ferez bien attention au fait que le sélecteur de pays doit être réinitialisé à chaque fois.
-
-6. Munissez le sélecteur de continents d’un écouteur d’événement pour que chaque changement de ce sélecteur lance la fonction `chargerSelecteurPays`.
+<!-- ### Le sélecteur de pays -->
 
 
-## EXERCICE 6 – Compléments divers
+<!-- 4. Lors d’un changement de valeur du sélecteur de continents, le sélecteur de pays doit proposer les pays du continent sélectionné. -->
+
+<!--    Créez, dans `scripts.js`, une fonction `chargerSelecteurPays` qui permet de construire les fils de la balise `<select id="pays">` : -->
+
+<!-- 	+ récupérer la valeur du sélecteur de continents ; -->
+<!-- 	+ récupérer, dans `countries`, le tableau correspondant à cette valeur ; -->
+<!-- 	+ créer, pour chaque entrée du tableau, une ligne du sélecteur de pays au moyen de la méthode `appendChild` (assez similaire au sélecteur de continents). -->
+<!-- 	+ ne pas oublier la ligne `<option selected disabled>choisissez un pays</option>` -->
+
+<!-- 5. Testez votre fonction dans la console. Vous ferez bien attention au fait que le sélecteur de pays doit être réinitialisé à chaque fois. -->
+
+<!-- 6. Munissez le sélecteur de continents d’un écouteur d’événement pour que chaque changement de ce sélecteur lance la fonction `chargerSelecteurPays`. -->
+
+
+## Exercice 6 – Compléments divers
 
 
 ### Détail css
