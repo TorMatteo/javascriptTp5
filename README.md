@@ -65,7 +65,7 @@ Le fichier `js/scripts.js` est à construire complètement.
 
 Cette page côté serveur est déjà codée pour vous permettre de lancer une requête de type `SELECT` sur la base de données. Elle incorpore un fichier `Model.php` qui incorpore lui-même un fichier `Conf.php`. Ce fichier `Model.php` vous propose une méthode `static selectByName` qui permettra de récupérer les 5 premières villes dont le nom commence comme la chaîne de caractères passée en paramètre à cette méthode (voir le code).
 
-Les deux classes `Conf` et `Model` ont été abordées au S3 et vous n’avez pas à y toucher (sauf si vous voulez changer les paramètres de connexion pour utiliser votre propre base de données, avec le fichier `cities.sql` du dossier `src/sql`).
+Les deux classes `Conf` et `Model` ont été abordées au S3 et vous n’avez pas à y toucher (sauf si vous voulez changer les paramètres de connexion pour utiliser votre propre base de données, avec le fichier [`cities.sql`](https://seafile.lirmm.fr/f/2f5336dac874454bbb31/?dl=1)).
 
 Vous n’interviendrez que sur quelques lignes du fichier `requeteVille.php`.
 
@@ -256,7 +256,7 @@ Et on pourrait utiliser par exemple un appel `requeteAJAX("Bo",callback_1);`
 <!-- 6. Munissez le sélecteur de continents d’un écouteur d’événement pour que chaque changement de ce sélecteur lance la fonction `chargerSelecteurPays`. -->
 
 
-## Exercice 6 – Améliorations diverses
+## Exercice 5 – Améliorations diverses
 
 ### Détail css
 
@@ -292,26 +292,35 @@ Lorsqu’un chargement est en cours, nous pouvons le signaler à l’utilisateur
 
    Note : l’instruction PHP : `sleep(1);`
    
-### Debouncing (Limitation de fréquence)
+### Debouncing (Limitation de fréquence) sur la saisie
 
-#### 1. Sur la saisie
+**Exercice :** Faire en sorte qu'il faut que l'on ait fini de taper depuis 200ms avant de lancer la requête.
 
-Faire en sorte qu'il faut que l'on ait fini de taper depuis 200ms avant de lancer la requête.
+Plus précisément, nous ne souhaitons pas envoyer de requête d'autocomplétion tant
+que l'utilisateur est en train de taper. Donc tant que 2 appuis de touche sont
+espacés de &lt; 200ms, il ne faut pas lancer la requête.
 
-**Bonus :**
+En pratique, vous devrez utiliser
+[`setTimeout`](https://developer.mozilla.org/fr/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout)
+comme minuteur. Vous aurez besoin de remettre le minuteur à zéro avec
+[`clearTimeout`](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/clearTimeout). Et
+vous devrez sûrement mettre en place une manière de savoir si un minuteur est
+déjà en cours.
 
-* Écrire une fonction `debounce(callback, timeout)` qui renvoie une
-fonction `callback_debounced` tel que le code suivant marche pour la question précédente : 
+### Debouncing sur les requêtes
 
-	```js
-	document.getElementById("ville").addEventListener("input", debounce(callback,200));
-	```
+**Exercice :** Faire en sorte qu'il n'y ait toujours qu'une requête en cours.
 
-#### 2. Sur le traitement de la réponse
+En effet, il y a un délai pour recevoir les suggestions d'autocomplétion et nous
+ne voudrions pas recevoir et afficher les suggestions d'une entrée qui a changé
+en temps.
 
-Faire en sorte d'annuler la requête précédente si une nouvelle requête est
-envoyée (cf [la documentation MDN de la méthode
-`abort`](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/abort)).
+Du coup, avant chaque nouvel envoi de requête, vous devez annuler la requête
+précédente si elle n'a pas encore terminé (cf [la documentation MDN de la
+méthode
+`abort`](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/abort)
+et celle de
+[`readyState`](https://developer.mozilla.org/fr/docs/Web/API/XMLHttpRequest/readyState)).
 
 <!-- https://davidwalsh.name/javascript-debounce-function -->
 <!-- Écrire une fonction debounce qui prend en entrée un fonction, ... -->
@@ -334,7 +343,9 @@ saisie à l'aide de l'API https://openweathermap.org/api
 
 1. Inscrivez-vous gratuitement sur le site pour obtenir une clé d'API.
 
-2. Lisez la [documentation de l'API](https://openweathermap.org/current#name) pour obtenir la météo d'une ville. Affichez la description de la météo (en anglais) sur votre page.
+2. Lisez la [documentation de l'API](https://openweathermap.org/current#name) pour obtenir la météo d'une ville. Affichez la description de la météo sur votre page. La description est en anglais par défaut, mais il existe un paramètre à mettre dans l'URL pour lui dire de le mettre en français (regardez la doc).
+
+<!-- Units, Lang=FR -->
 
 3. On peut trouver des icônes correspondants aux météos (cf la [documentation sur la liste des codes météorologiques](https://openweathermap.org/current#list)). Affichez sur votre page une icône correspondant à la météo.
 
@@ -342,9 +353,20 @@ saisie à l'aide de l'API https://openweathermap.org/api
    une suggestion d'auto-complétion.
 
 
-<!-- https://api.openweathermap.org/data/2.5/weather?q=${meteoInputElement.value}&appid= -->
+<!-- https://api.openweathermap.org/data/2.5/weather?q=${meteoInputElement.value}&appid=xxx&lang=FR -->
 <!-- https://openweathermap.org/img/wn/10d.png -->
 
 ### Utilisation des touches ↓ , ↑ et ↵
 
 Les touches haut et bas servent habituellement à se déplacer dans la liste des suggestions, et la touche `ENTER` à valider l’élément courant. L’utilisation de ces touches entraîne une mise à jour du champ texte où s’inscrit le nom de la ville. Programmez ces comportements.
+
+### Bonus : debouncing automatisé
+
+Nous allons automatiser la fonctionnalité de la section "Debouncing sur la
+saisie". Vous devez écrire une fonction `debounce(callback, timeout)` qui prend
+en argument une fonction `callback` et un nombre `timeout`, et renvoie une
+fonction `callback_debounced`. Le but est que votre ancien code puisse être remplacé par :
+
+```js
+document.getElementById("ville").addEventListener("input", debounce(callback,200));
+```
