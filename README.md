@@ -7,6 +7,8 @@
 
 Cliquez sur le lien ci-dessous pour faire, dans un dossier public_html/JS/TD6, votre fork privé du TD6 (**attention, pas de fork à la main !**):
 
+https://classroom.github.com/a/-lunxKYF
+
 ## Introduction
 
 Dans ce TD6, on reprend l’aspect asynchrone de JavaScript (abordé au TD5), qui permettra de modifier le contenu d’un élément d’autocomplétion, représenté par la balise html `<div id="autocompletion">`, à chaque modification du champ de saisie `<input id="ville">`.
@@ -254,8 +256,7 @@ Et on pourrait utiliser par exemple un appel `requeteAJAX("Bo",callback_1);`
 <!-- 6. Munissez le sélecteur de continents d’un écouteur d’événement pour que chaque changement de ce sélecteur lance la fonction `chargerSelecteurPays`. -->
 
 
-## Exercice 6 – Compléments divers
-
+## Exercice 6 – Améliorations diverses
 
 ### Détail css
 
@@ -290,7 +291,60 @@ Lorsqu’un chargement est en cours, nous pouvons le signaler à l’utilisateur
 3. Pour que le comportement soit visible, truquez en ajoutant une temporisation de 1 seconde dans `requeteVille.php`
 
    Note : l’instruction PHP : `sleep(1);`
+   
+### Debouncing (Limitation de fréquence)
 
-## Exercice 7 – Utilisation des touches ↓ , ↑ et ↵
+#### 1. Sur la saisie
+
+Faire en sorte qu'il faut que l'on ait fini de taper depuis 200ms avant de lancer la requête.
+
+**Bonus :**
+
+* Écrire une fonction `debounce(callback, timeout)` qui renvoie une
+fonction `callback_debounced` tel que le code suivant marche pour la question précédente : 
+
+	```js
+	document.getElementById("ville").addEventListener("input", debounce(callback,200));
+	```
+
+#### 2. Sur le traitement de la réponse
+
+Faire en sorte d'annuler la requête précédente si une nouvelle requête est
+envoyée (cf [la documentation MDN de la méthode
+`abort`](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/abort)).
+
+<!-- https://davidwalsh.name/javascript-debounce-function -->
+<!-- Écrire une fonction debounce qui prend en entrée un fonction, ... -->
+<!-- // Returns a function, that, as long as it continues to be invoked, will not -->
+<!-- // be triggered. The function will be called after it stops being called for -->
+<!-- // N milliseconds. If `immediate` is passed, trigger the function on the -->
+<!-- // leading edge, instead of the trailing. -->
+<!-- function debounce(func, wait, immediate) { -->
+
+<!-- Throttling  -->
+<!-- https://codeburst.io/throttling-and-debouncing-in-javascript-b01cad5c8edf -->
+<!-- Contient aussi des use case -->
+
+
+### Utilisation de services Web externes
+
+Il existe une multitude de services Web qui permettent d'obtenir des données en appelant une
+URL spécifique. Nous vous proposons d'aller récupérer la météo de la ville
+saisie à l'aide de l'API https://openweathermap.org/api
+
+1. Inscrivez-vous gratuitement sur le site pour obtenir une clé d'API.
+
+2. Lisez la [documentation de l'API](https://openweathermap.org/current#name) pour obtenir la météo d'une ville. Affichez la description de la météo (en anglais) sur votre page.
+
+3. On peut trouver des icônes correspondants aux météos (cf la [documentation sur la liste des codes météorologiques](https://openweathermap.org/current#list)). Affichez sur votre page une icône correspondant à la météo.
+
+4. Faites en sorte que l'affichage de la météo se déclenche quand on clique sur
+   une suggestion d'auto-complétion.
+
+
+<!-- https://api.openweathermap.org/data/2.5/weather?q=${meteoInputElement.value}&appid= -->
+<!-- https://openweathermap.org/img/wn/10d.png -->
+
+### Utilisation des touches ↓ , ↑ et ↵
 
 Les touches haut et bas servent habituellement à se déplacer dans la liste des suggestions, et la touche `ENTER` à valider l’élément courant. L’utilisation de ces touches entraîne une mise à jour du champ texte où s’inscrit le nom de la ville. Programmez ces comportements.
