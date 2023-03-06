@@ -1,23 +1,27 @@
-# ![](ressources/logo.jpeg) Prog web client riche - JavaScript
+---
+lang: fr
+---
+
+# ![](ressources/logo.jpeg) R.4.01 Développement Web - JavaScript
 
 ### IUT Montpellier-Sète – Département Informatique
 
-## TD6
+## TD5
 #### _Thème : asynchronisme en JavaScript, AJAX, formulaire autocomplétif_
 
-Cliquez sur le lien ci-dessous pour faire, dans un dossier public_html/JS/TD6, votre fork privé du TD6 (**attention, pas de fork à la main !**):
-
-https://classroom.github.com/a/eTtPxRlg
+Commencez par `git clone` le *fork* du TD5 que nous avons fait pour vous. Ce
+*fork* doit se trouver dans
+https://gitlabinfo.iutmontp.univ-montp2.fr/r4.01-developpementweb/etu/votre_login_IUT/TD5
 
 ## Introduction
 
-Dans ce TD6, on reprend l’aspect asynchrone de JavaScript (abordé au TD5), qui permettra de modifier le contenu d’un élément d’autocomplétion, représenté par la balise html `<div id="autocompletion">`, à chaque modification du champ de saisie `<input id="ville">`.
+Dans ce TD5, on reprend l’aspect asynchrone de JavaScript (abordé au TD5), qui permettra de modifier le contenu d’un élément d’autocomplétion, représenté par la balise html `<div id="autocompletion">`, à chaque modification du champ de saisie `<input id="ville">`.
 
 Cet élément `<div id="autocompletion">` fournira alors une liste de villes dont le nom commence par les lettres insérées dans `<input id="ville">`.
 
 Voir ci-dessous :
 
-<p align="center">
+<p style="text-align:center">
    <img src="ressources/img1-crop.png">
 </p>
 
@@ -27,7 +31,7 @@ Le contenu de cet élément `<div id="autocompletion">` est alimenté par le ré
 
 <!-- Contrairement à la liste de villes (plus de 36000 entrées, ce qui justifie le stockage sur base de données), la liste de pays par continent est de taille raisonnable et sera gérée en local par JavaScript, par un fichier `countries.js` qui affecte une variable globale `countries`.   -->
 
-Vous mettrez en place le contexte web dans votre `public_html/JS/TD6` avec les fichiers du dossier `src`.
+Vous mettrez en place le contexte web dans votre `public_html/JS/TD5` avec les fichiers du dossier `src`.
 
 Le fichier `js/scripts.js` est à construire complètement.
 
@@ -71,7 +75,7 @@ Vous n’interviendrez que sur quelques lignes du fichier `requeteVille.php`.
 
 Ce fichier sera exécuté au moyen d’url du type `requeteVille.php?ville=Bo`
 
-Le paramètre `ville` permettra d’utiliser `selectByName($name)`, avec la bonne valeur pour le paramètre `$name`. Par exemple, l’url `http://webinfo.iutmontp.univ-montp2.fr/~monlogin/JS/td6-moi/src/php/requeteVille.php?ville=Bo` permettra de lancer, par la fonction `selectByName`, la requête `SQL` suivante :
+Le paramètre `ville` permettra d’utiliser `selectByName($name)`, avec la bonne valeur pour le paramètre `$name`. Par exemple, l’url `http://webinfo.iutmontp.univ-montp2.fr/~monlogin/JS/td5-moi/src/php/requeteVille.php?ville=Bo` permettra de lancer, par la fonction `selectByName`, la requête `SQL` suivante :
 
 ```sql
 SELECT * FROM cities WHERE name LIKE 'Bo%' LIMIT 5
@@ -88,12 +92,12 @@ SELECT * FROM cities WHERE name LIKE 'Bo%' LIMIT 5
 2. Testez ensuite le bon fonctionnement de la page en appelant des url du type `requeteVille.php?ville=Mo` ou `requeteVille.php?ville=Tou`. Vous devez voir dans le navigateur un affichage brut du résultat de la requête SQL.
 
 
-<p align="center">
+<p style="text-align:center">
    <img src="ressources/img0.png">
 </p>
 
 
-<p align="center">
+<p style="text-align:center">
    <i>résultat de la requête <strong>requeteVille.php?ville=Tou</strong></i>
 </p>
 
@@ -181,13 +185,13 @@ Et on pourrait utiliser par exemple un appel `requeteAJAX("Bo",callback_1);`
 
    Vous devriez obtenir un résultat comme ci-dessous
 
-<p align="center">
+<p style="text-align:center">
    <img src="ressources/img2.png">
 </p>
 
 6. Créez une fonction `callback_3` qui transforme encore le résultat précédent pour créer un tableau contenant l’attribut `name` de chacun des objets. Ainsi, quand on lance la commande `requeteAJAX("Bo",callback_3)` on doit obtenir dans la console :
 
-<p align="center">
+<p style="text-align:center">
    <img src="ressources/img3.png">
 </p>
 
