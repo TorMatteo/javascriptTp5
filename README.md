@@ -22,7 +22,7 @@ Cet élément `<div id="autocompletion">` fournira alors une liste de villes don
 Voir ci-dessous :
 
 <p style="text-align:center">
-   <img src="ressources/img1-crop.png">
+   <img src="ressources/img1-crop.png" alt="">
 </p>
 
 Le contenu de cet élément `<div id="autocompletion">` est alimenté par le résultat (après traitement) d’une requête de type **AJAX** sur une base de données.
@@ -108,7 +108,7 @@ SELECT * FROM rletud.cities WHERE name LIKE 'Bo%' LIMIT 5
 
 
 <p style="text-align:center">
-   <img src="ressources/img0.png">
+   <img src="ressources/img0.png" alt="">
 </p>
 
 
@@ -201,13 +201,13 @@ Et on pourrait utiliser par exemple un appel `requeteAJAX("Bo",callback_1);`
    Vous devriez obtenir un résultat comme ci-dessous
 
 <p style="text-align:center">
-   <img src="ressources/img2.png">
+   <img src="ressources/img2.png" alt="">
 </p>
 
 6. Créez une fonction `callback_3` qui transforme encore le résultat précédent pour créer un tableau contenant l’attribut `name` de chacun des objets. Ainsi, quand on lance la commande `requeteAJAX("Bo",callback_3)` on doit obtenir dans la console :
 
 <p style="text-align:center">
-   <img src="ressources/img3.png">
+   <img src="ressources/img3.png" alt="">
 </p>
 
 
@@ -366,9 +366,9 @@ saisie à l'aide de l'API https://openweathermap.org/api
    *Note :* Il est possible que la clé API mette un peu de temps à arriver
    (~1h). N'hésitez pas à continuer le TD sans attendre la clé.
 
-2. Lisez la [documentation de l'API](https://openweathermap.org/current#name) pour obtenir la météo d'une ville. Affichez la description de la météo sur votre page. La description est en anglais par défaut, mais il existe un paramètre à mettre dans l'URL pour lui dire de le mettre en français (regardez la doc).
+2. Lisez la [documentation de l'API](https://openweathermap.org/current#name) pour obtenir la météo d'une ville. Affichez la description de la météo sur votre page (*cf.* la balise `<span id="meteo">`). La description est en anglais par défaut, mais il existe un paramètre à mettre dans l'URL pour lui dire de le mettre en français (regardez la doc).
 
-<!-- Units, Lang=FR -->
+    <!-- Units, Lang=FR -->
 
 3. On peut trouver des icônes correspondants aux météos (cf la [documentation sur la liste des codes météorologiques](https://openweathermap.org/current#list)). Affichez sur votre page une icône correspondant à la météo.
 
@@ -381,7 +381,7 @@ saisie à l'aide de l'API https://openweathermap.org/api
 
 ### Utilisation des touches ↓ , ↑ et ↵
 
-Les touches haut et bas servent habituellement à se déplacer dans la liste des suggestions, et la touche `ENTER` à valider l’élément courant. L’utilisation de ces touches entraîne une mise à jour du champ texte où s’inscrit le nom de la ville. Programmez ces comportements.
+Les touches haut et bas servent habituellement à se déplacer dans la liste des suggestions, et la touche `ENTER` à valider l’élément courant. L’utilisation de ces touches entraîne une mise à jour du champ texte où s’inscrit le nom de la ville (voir le CSS pour la classe `selected`). Programmez ces comportements.
 
 ### Bonus : debouncing automatisé
 

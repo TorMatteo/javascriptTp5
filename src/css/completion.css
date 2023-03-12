@@ -16,6 +16,10 @@
     cursor:default;
 }
 
+#autocompletion p.selected {
+    background-color: lightgrey;
+}
+
 #acdiv {
     display:inline-block;
     vertical-align: top;
