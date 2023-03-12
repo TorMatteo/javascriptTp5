@@ -2,10 +2,12 @@
 
 class Conf {
     private static $database = array(
-        'hostname' => 'webinfo.iutmontp.univ-montp2.fr',
-        'database' => 'etugagne',
-        'login'    => 'etugagne',
-        'password' => '31415'
+        'hostname' => '162.38.222.142',
+        'database' => 'iut',
+        'login'    => '', // votre login IUT
+        // votre mdp PostgreSQL = mot de passe LDAP
+        //                      = mot de passe sur les machines
+        'password' => '',
     );
 
     static public function getLogin() {

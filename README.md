@@ -15,7 +15,7 @@ https://gitlabinfo.iutmontp.univ-montp2.fr/r4.01-developpementweb/etu/votre_logi
 
 ## Introduction
 
-Dans ce TD5, on reprend l’aspect asynchrone de JavaScript (abordé au TD5), qui permettra de modifier le contenu d’un élément d’autocomplétion, représenté par la balise html `<div id="autocompletion">`, à chaque modification du champ de saisie `<input id="ville">`.
+Dans ce TD5, on reprend l’aspect asynchrone de JavaScript (abordé au TD4), qui permettra de modifier le contenu d’un élément d’autocomplétion, représenté par la balise *HTML* `<div id="autocompletion">`, à chaque modification du champ de saisie `<input id="ville">`.
 
 Cet élément `<div id="autocompletion">` fournira alors une liste de villes dont le nom commence par les lettres insérées dans `<input id="ville">`.
 
@@ -43,12 +43,19 @@ Le fichier `js/scripts.js` est à construire complètement.
    <div id="autocompletion">
      <p>Bordeaux</p>
      <p>Toulouse</p>
-	 <p>Montpellier</p>
+     <p>Montpellier</p>
      <p>Nice</p>
    </div>
 	```
 
-   Votre code utilisera obligatoirement la méthode `appendChild` pour chaque `<p>` à créer. Insérez votre fichier `scripts.js` dans le `html`, puis testez votre fonction avec le tableau ci-dessus en le déclarant dans une variable `tableau` et en lançant `afficheVilles(tableau)` dans la console;
+   Votre code utilisera obligatoirement l'une des méthodes suivantes pour
+   insérer les paragraphes `<p>` : 
+   [`appendChild`](https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild), 
+   [`insertAdjacentHTML`](https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML) ou 
+   [`insertAdjacentElement`](https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentElement). 
+   Insérez votre fichier `scripts.js` dans le *HTML*, puis testez votre fonction
+   avec le tableau ci-dessus en le déclarant dans une variable `tableau` et en
+   lançant `afficheVilles(tableau)` dans la console;
 
 	```js
 	let tableau = ["Bordeaux","Toulouse","Montpellier","Nice"];
@@ -69,27 +76,35 @@ Le fichier `js/scripts.js` est à construire complètement.
 
 Cette page côté serveur est déjà codée pour vous permettre de lancer une requête de type `SELECT` sur la base de données. Elle incorpore un fichier `Model.php` qui incorpore lui-même un fichier `Conf.php`. Ce fichier `Model.php` vous propose une méthode `static selectByName` qui permettra de récupérer les 5 premières villes dont le nom commence comme la chaîne de caractères passée en paramètre à cette méthode (voir le code).
 
-Les deux classes `Conf` et `Model` ont été abordées au S3 et vous n’avez pas à y toucher (sauf si vous voulez changer les paramètres de connexion pour utiliser votre propre base de données, avec le fichier [`cities.sql`](https://seafile.lirmm.fr/f/2f5336dac874454bbb31/?dl=1)).
+Pour accéder à la base de données, vous avez 2 choix : 
+1. utiliser la table `rletud.cities` du serveur PostgreSQL de l'IUT. Vous avez
+   l'accès en lecture sur cette table, il suffit que vous remplissiez votre
+   login et mot de passe IUT dans `Conf.php` ;
+2. utiliser votre propre base de données, avec le fichier
+[`cities.sql`](https://seafile.lirmm.fr/f/2f5336dac874454bbb31/?dl=1).
 
-Vous n’interviendrez que sur quelques lignes du fichier `requeteVille.php`.
 
-Ce fichier sera exécuté au moyen d’url du type `requeteVille.php?ville=Bo`
+Les deux classes `Conf` et `Model` ont été abordées au semestre 3 et vous n’avez
+pas à y toucher par la suite. Vous n’interviendrez que sur quelques lignes du
+fichier `requeteVille.php`.
 
-Le paramètre `ville` permettra d’utiliser `selectByName($name)`, avec la bonne valeur pour le paramètre `$name`. Par exemple, l’url `http://webinfo.iutmontp.univ-montp2.fr/~monlogin/JS/td5-moi/src/php/requeteVille.php?ville=Bo` permettra de lancer, par la fonction `selectByName`, la requête `SQL` suivante :
+Ce fichier sera exécuté au moyen d’*URL* du type `requeteVille.php?ville=Bo`
+
+Le paramètre `ville` permettra d’utiliser `selectByName($name)`, avec la bonne valeur pour le paramètre `$name`. Par exemple, l’*URL* `http://webinfo.iutmontp.univ-montp2.fr/~monlogin/JS/TD5/src/php/requeteVille.php?ville=Bo` permettra de lancer, par la fonction `selectByName`, la requête `SQL` suivante :
 
 ```sql
-SELECT * FROM cities WHERE name LIKE 'Bo%' LIMIT 5
+SELECT * FROM rletud.cities WHERE name LIKE 'Bo%' LIMIT 5
 ```
 
 1. Complétez la page `requeteVille.php` pour qu’elle suive les étapes suivantes :
 
-+ extraire la ville passée en `GET` dans l’url ;
+   + extraire la ville passée en `GET` dans l’*URL* ;
 
-+ appeler la fonction `selectByName` déjà codée et stocker le résultat dans une variable `$tab` ;
+   + appeler la fonction `selectByName` déjà codée et stocker le résultat dans une variable `$tab` ;
 
-+ produire un `echo json_encode` de cette variable. L’affichage produit se fera donc en format `JSON` facilement exploitable par JavaScript.
+   + produire un `echo json_encode` de cette variable. L’affichage produit se fera donc en format `JSON` facilement exploitable par JavaScript.
 
-2. Testez ensuite le bon fonctionnement de la page en appelant des url du type `requeteVille.php?ville=Mo` ou `requeteVille.php?ville=Tou`. Vous devez voir dans le navigateur un affichage brut du résultat de la requête SQL.
+2. Testez ensuite le bon fonctionnement de la page en appelant des *URL* du type `requeteVille.php?ville=Mo` ou `requeteVille.php?ville=Tou`. Vous devez voir dans le navigateur un affichage brut du résultat de la requête SQL.
 
 
 <p style="text-align:center">
@@ -105,7 +120,7 @@ SELECT * FROM cities WHERE name LIKE 'Bo%' LIMIT 5
 
 ### Un peu de technique
 
-Comme au TD4, nous allons utiliser un objet `XMLHttpRequest` qui permet de lancer des requêtes HTTP de manière asynchrone, c’est-à-dire sans bloquer la page web courante.
+Comme au TD4, nous allons utiliser un objet `XMLHttpRequest` qui permet de lancer des requêtes *HTTP* de manière asynchrone, c’est-à-dire sans bloquer la page web courante.
 
 L’ensemble des technologies autour des pages web asynchrones s’appelle `AJAX` (_Asynchronous Javascript And Xml_).
 
@@ -126,9 +141,9 @@ function requeteAJAX(stringVille) {
 Rappels sur la fonction `requeteAJAX` :
 
 + gère un paramètre `stringVille` qui est une chaîne de caractères (ce sera celle qu’on écrira dans la balise `<input id="ville">`);
-+ crée une url pour `requeteVille.php`, construite à partir du paramètre `stringVille`. On traite `stringVille` pour gérer les caractères spéciaux des URL avec [encodeURIComponent](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent);
++ crée une *URL* pour `requeteVille.php`, construite à partir du paramètre `stringVille`. On traite `stringVille` pour gérer les caractères spéciaux des URL avec [encodeURIComponent](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent);
 + crée un objet `XMLHttpRequest` nommé `requete`;
-+ ouvre cette requête avec la méthode `open` qui donne le type de requête HTTP à effectuer (ici `GET`), l’URL de la page demandée et le troisième argument (`true`) signifie que la requête doit être asynchrone.
++ ouvre cette requête avec la méthode `open` qui donne le type de requête *HTTP* à effectuer (ici `GET`), l’URL de la page demandée et le troisième argument (`true`) signifie que la requête doit être asynchrone.
 + met cet objet `requete` en écoute de l’événement `load`, ce qui signifie que l’objet `requete` attendra la fin du chargement des données commandées à la base de données, pour lancer la fonction déclarée de manière anonyme et dont la modeste mission est ici d’afficher l’objet `requete` dans la console.
 + lance la requête par la méthode `send`. Le paramètre `null` est lié au fait que la méthode est `GET`. Si c’était `POST`, on aurait comme paramètre une chaîne de caractères annonçant les paires «`nom=valeur`», c’est-à-dire ici «`ville=…`» (cf. la [documentation MDN de send](https://developer.mozilla.org/fr/docs/Web/API/XMLHttpRequest/send)).
 
@@ -264,7 +279,7 @@ Et on pourrait utiliser par exemple un appel `requeteAJAX("Bo",callback_1);`
 
 ### Détail css
 
-Vous corrigerez un petit détail : Il y a un petit carré gris qui apparaît quand `<div id="autocompletion">` est vide. C’est sa `border,` de largeur `1px`. Faites en sorte de corriger, au niveau du JavaScript, l’attribut `style.borderWidth` de cette `div` en fonction de son contenu, pour ne pas avoir ce défaut du petit carré gris.
+Vous corrigerez un petit détail : Il y a un petit carré gris qui apparaît quand `<div id="autocompletion">` est vide. C’est sa `border`, de largeur `1px`. Faites en sorte de corriger, au niveau du JavaScript, l’attribut `style.borderWidth` de cette `div` en fonction de son contenu, pour ne pas avoir ce défaut du petit carré gris.
 
 
 ### Limitation de l’autocomplétion
@@ -274,7 +289,7 @@ Modifiez légèrement la fonction associée à l’événement `input` pour que 
 
 ### Signal de chargement
 
-Lorsqu’un chargement est en cours, nous pouvons le signaler à l’utilisateur pour qu’il patiente le temps nécessaire. Dans notre cas, nous afficherons le GIF de chargement `loading.gif` fourni dans l’archive .zip pendant le délai de réponse du serveur.
+Lorsqu’un chargement est en cours, nous pouvons le signaler à l’utilisateur pour qu’il patiente le temps nécessaire. Dans notre cas, nous afficherons le GIF de chargement `src/img/loading.gif` pendant le délai de réponse du serveur.
 
 1. Modifiez `requeteAJAX` pour que la fonction prenne en paramètres supplémentaires deux fonctions `startLoadingAction` et `endLoadingAction`.
 
@@ -287,7 +302,7 @@ Lorsqu’un chargement est en cours, nous pouvons le signaler à l’utilisateur
 		```
 
 
-2. Dans la fonction `maRequeteAJAX`, modifiez l’appel à `requeteAJAX` pour ajouter deux nouveaux paramètres : ce seront deux fonctions déclarées en fonctions anonymes :
+2. Dans la fonction `maRequeteAJAX`, modifiez l’appel à `requeteAJAX` pour ajouter deux nouveaux paramètres fonctions anonymes :
 
 	+ la première, qui jouera le rôle de `startLoadingAction`, rendra visible le GIF de chargement ;
 	+ la deuxième, qui jouera le rôle de `endLoadingAction`, lui redonnera une visibilité `hidden`.
@@ -317,7 +332,7 @@ déjà en cours.
 
 En effet, il y a un délai pour recevoir les suggestions d'autocomplétion et nous
 ne voudrions pas recevoir et afficher les suggestions d'une entrée qui a changé
-en temps.
+entre temps.
 
 Du coup, avant chaque nouvel envoi de requête, vous devez annuler la requête
 précédente si elle n'a pas encore terminé (cf [la documentation MDN de la
@@ -345,7 +360,11 @@ Il existe une multitude de services Web qui permettent d'obtenir des données en
 URL spécifique. Nous vous proposons d'aller récupérer la météo de la ville
 saisie à l'aide de l'API https://openweathermap.org/api
 
-1. Inscrivez-vous gratuitement sur le site pour obtenir une clé d'API.
+1. Inscrivez-vous gratuitement sur le site pour obtenir une clé d'API. Pour
+   ceci, sur la page [*Pricing*](https://openweathermap.org/price), cliquez sur le bouton *Get API Key* qui se trouve dans la colonne *Free*.
+
+   *Note :* Il est possible que la clé API mette un peu de temps à arriver
+   (~1h). N'hésitez pas à continuer le TD sans attendre la clé.
 
 2. Lisez la [documentation de l'API](https://openweathermap.org/current#name) pour obtenir la météo d'une ville. Affichez la description de la météo sur votre page. La description est en anglais par défaut, mais il existe un paramètre à mettre dans l'URL pour lui dire de le mettre en français (regardez la doc).
 
