@@ -67,10 +67,10 @@ Le fichier `js/scripts.js` est à construire complètement.
 
 2. Créez une fonction `videVilles` qui vide l’élément `<div id="autocompletion">`. Cette fonction sera appelée par `afficheVilles`. Vous utiliserez deux approches différentes :
 
-	- une méthode qui utilise `removeChild`,
-	- une méthode plus basique qui remet le `innerHTML` de `<div id="autocompletion">` à `""`.
+	- une méthode qui utilise `removeChild` ou `remove`,
+	- une méthode plus basique qui remet le `innerHTML` ou le `textContent` de `<div id="autocompletion">` à `""`.
 
-   Remarque : on ne dit pas que les méthodes `appendChild` et `removeChild` sont meilleures qu’un "bricolage" du `innerHTML`, par contre elles sont plus dans la logique objet, et seront plus simples à utiliser si l’arborescence à ajouter/modifier se complique. Notre arborescence de `<p>` reste ici simple.
+   Remarque : on ne dit pas que les méthodes `appendChild` et `removeChild` sont mieux que l'utilisation de `innerHTML`. Il faut savoir utiliser les différents méthodes de modifications d'un noeud qui peuvent être utiles dans différents contextes. On notera quand même que `insertAdjacentHTML` est considérablement plus efficace que `innerHTML+=...` et que pour vider un noeud `textContent=""` est plus efficace que les autres méthodes proposées ici.
 
 ## Exercice 2 – La page de requête `requeteVille.php`
 
