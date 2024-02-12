@@ -1,29 +1,32 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-        <meta charset="UTF-8">
-        <title>Autocomplétion en Javascript</title>
-        <link rel="stylesheet" href="css/completion.css" type="text/css">
-        <script type="text/javascript" src="js/scripts.js" defer></script>
-    </head>
-    <body>
-        <form action="php/resultat.php" method="post">
-            <fieldset>
-                <legend>Autocomplétion en Javascript</legend>
-                <div>
-                    <label for="ville">Ville :&nbsp;</label>
-                    <div id="acdiv">
-                        <input id="ville" name="ville" autocomplete="off" type="text" required>
-                        <img id="loading" src="img/loading.gif" alt="">
-                        <span id="meteo"></span>
-                        <div id="autocompletion"></div>
-                    </div>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <title>Autocomplétion en Javascript</title>
+    <link rel="stylesheet" href="css/completion.css" type="text/css">
+    <script type="text/javascript" src="js/scripts.js" defer></script>
+</head>
+
+<body>
+    <form action="php/resultat.php" method="post">
+        <fieldset>
+            <legend>Autocomplétion en Javascript</legend>
+            <div>
+                <label for="ville">Ville :&nbsp;</label>
+                <div id="acdiv">
+                    <input id="ville" name="ville" autocomplete="off" type="text" required>
+                    <img id="loading" src="img/loading.gif" alt="">
+                    <span id="meteo"></span>
+                    <div id="autocompletion"></div>
                 </div>
-            </fieldset>
-            <p>
-                <input id="envoyer" value="Envoyer" type="submit">
-            </p>
-        </form>
-    </body>
+            </div>
+        </fieldset>
+        <p>
+            <input id="envoyer" value="Envoyer" type="submit">
+        </p>
+    </form>
+</body>
+
 </html>

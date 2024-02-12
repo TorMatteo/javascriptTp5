@@ -4,11 +4,16 @@
     border: 1px solid grey;
     line-height:1.5;
     position: absolute;
+    box-sizing: border-box;
+    width: 100%;
 }
 
 #autocompletion p {
     margin: 0 0 0 0;
     padding: 0 5px 0 5px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 #autocompletion p:hover {
@@ -23,6 +28,7 @@
 #acdiv {
     display:inline-block;
     vertical-align: top;
+    position: relative;
 }
 
 #acdiv * {
@@ -32,6 +38,7 @@
 #loading {
     visibility: hidden;
     width:20px;
+    position: absolute;
 }
 
 fieldset {
@@ -41,4 +48,9 @@ fieldset {
 fieldset>div {
     display:flex;
     align-items:center;
+}
+
+input#ville {
+    width: 100%;
+    box-sizing: border-box;
 }

@@ -298,7 +298,7 @@ Lorsqu’un chargement est en cours, nous pouvons le signaler à l’utilisateur
    + La deuxième sera exécutée dès la réception de la réponse. On aura donc des appels de la forme
 
 		```js
-		requeteAJAX("Bo",callback,action_debut,action_fin)
+		requeteAJAX("Bo",callback,action_debut,action_fin);
 		```
 
 
