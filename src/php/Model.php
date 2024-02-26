@@ -15,7 +15,7 @@ class Model {
             // connexion à la base de données
             // le dernier argument sert à ce que toutes les chaines de charactères
             // en entrée et sortie de MySql soit dans le codage UTF-8
-            self::$pdo = new PDO("pgsql:host={$host};port=5432;dbname={$dbname};", $login, $pass);
+            self::$pdo = new PDO("pgsql:host={$host};port=5673;dbname={$dbname};", $login, $pass);
             // on active le mode d'affichage des erreurs, et le lancement d'exception en cas d'erreur
             self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $ex) {

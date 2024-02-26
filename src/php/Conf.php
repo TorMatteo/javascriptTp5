@@ -2,7 +2,7 @@
 
 class Conf {
     private static $database = array(
-        'hostname' => '162.38.222.142',
+        'hostname' => '162.38.222.151',
         'database' => 'iut',
         'login'    => '', // votre login IUT
         // votre mdp PostgreSQL = mot de passe LDAP

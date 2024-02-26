@@ -53,8 +53,7 @@ Le fichier `js/scripts.js` est à construire complètement.
    [`appendChild`](https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild), 
    [`insertAdjacentHTML`](https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML) ou 
    [`insertAdjacentElement`](https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentElement). 
-   Insérez votre fichier `scripts.js` dans le *HTML*, puis testez votre fonction
-   avec le tableau ci-dessus en le déclarant dans une variable `tableau` et en
+   Testez votre fonction avec le tableau ci-dessus en le déclarant dans une variable `tableau` et en
    lançant `afficheVilles(tableau)` dans la console;
 
 	```js
