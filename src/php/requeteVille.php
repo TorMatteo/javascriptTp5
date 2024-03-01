@@ -16,3 +16,6 @@ require_once('Model.php');
 
 // affichage en format JSON du résultat précédent
 // ...
+$ville = $_GET['ville'];
+$tab = Model::selectByName($ville);
+echo json_encode($tab);

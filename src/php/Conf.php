@@ -2,12 +2,11 @@
 
 class Conf {
     private static $database = array(
-        'hostname' => '162.38.222.151',
-        'database' => 'iut',
-        'login'    => '', // votre login IUT
-        // votre mdp PostgreSQL = mot de passe LDAP
-        //                      = mot de passe sur les machines
-        'password' => '',
+        'hostname' => 'webinfo.iutmontp.univ-montp2.fr',
+        'database' => 'tordeuxm',
+        'login'    => 'tordeuxm',
+        'password' => '08022003',
+        'port' => '3316' // IUT : 3316, sinon 3306
     );
 
     static public function getLogin() {
@@ -26,6 +25,8 @@ class Conf {
         return self::$database['password'];
     }
 
-}
+    static public function getPort() {
+        return self::$database['port'];
+    }
 
-?>
+}

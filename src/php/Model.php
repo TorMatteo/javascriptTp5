@@ -11,12 +11,9 @@ class Model {
         $dbname = Conf::getDatabase();
         $login  = Conf::getLogin();
         $pass   = Conf::getPassword();
+        $port   = Conf::getPort();
         try {
-            // connexion à la base de données
-            // le dernier argument sert à ce que toutes les chaines de charactères
-            // en entrée et sortie de MySql soit dans le codage UTF-8
-            self::$pdo = new PDO("pgsql:host={$host};port=5673;dbname={$dbname};", $login, $pass);
-            // on active le mode d'affichage des erreurs, et le lancement d'exception en cas d'erreur
+            self::$pdo = new PDO("mysql:host=$host;dbname=$dbname;port=$port", $login, $pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
             self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $ex) {
             echo $ex->getMessage();
@@ -27,7 +24,7 @@ class Model {
     public static function selectByName($name) {
         try {
             // préparation de la requête
-            $sql = "SELECT * FROM rletud.cities WHERE name LIKE :name_tag LIMIT 5";
+            $sql = "SELECT * FROM cities WHERE name LIKE :name_tag LIMIT 5";
             $req_prep = self::$pdo->prepare($sql);
             // passage de la valeur de name_tag
             $values = array("name_tag" => $name."%");
